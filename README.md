@@ -1,10 +1,38 @@
 # Groundwater-LAGNet
 
-Final paper-scope lightweight code package and evidence-table generator for station-adaptive lag spatio-temporal graph forecasting of groundwater-level changes.
+[![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)](environment.yml)
+[![PyTorch](https://img.shields.io/badge/PyTorch-supported-EE4C2C?logo=pytorch&logoColor=white)](requirements.txt)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Scope](https://img.shields.io/badge/scope-final%20paper%20code-blue)](README.md)
 
-This repository is intentionally not a full raw-data-to-paper archive. It contains the public training/evaluation code, final-scope configs, lightweight result-table snapshots, and a script that regenerates the paper tables from a separate evidence package. Raw datasets, checkpoints, complete predictions, and large archived run directories are kept outside the code repository.
+**Groundwater-LAGNet** is a final paper-scope code package and evidence-table generator for **LAG-STGNet**, a station-adaptive lag spatio-temporal graph network for multi-site groundwater-level-change forecasting.
 
-Dataset source links and expected local CSV paths are documented in `DATA.md`.
+The repository is designed to be clean, lightweight, and honest about its boundaries: it contains public code, final configs, table-generation utilities, tests, and lightweight CSV snapshots. Raw datasets, checkpoints, full predictions, and the archived evidence package are intentionally kept outside the code repository.
+
+## At A Glance
+
+| Item | Setting |
+| --- | --- |
+| Task | Daily `90 d -> 30 d` multi-site sequence forecasting |
+| Target | Future 30-day groundwater-level change from the prediction start level |
+| Main model | `lag_stgnet` / LAG-STGNet |
+| Lag candidates | `3, 7, 14, 30` days |
+| Graph prior | Train-set Pearson correlation graph, `topk=15` |
+| Adaptive graph mix | `alpha/lambda=0.3` in the main setting |
+| Datasets | FrenchPiezo and BC PGOWN128 |
+| Paper unit | `cm` for MAE/RMSE |
+
+## Repository Map
+
+| Path | Purpose |
+| --- | --- |
+| `src/` | Model, data, graph, metric, training, and utility code |
+| `configs/final/` | Final paper-scope configs for main, ablation, and sensitivity settings |
+| `scripts/` | Prepare data, train, evaluate, generate tables, and release-check |
+| `results/final_paper_tables/` | Lightweight paper-table CSV snapshots generated from evidence |
+| `tests/` | Scope, metric, data, model-shape, and release-safety tests |
+| `DATA.md` | Public data source links and expected local CSV paths |
+| `EVIDENCE_PACKAGE.md` | External evidence package layout and lookup rules |
 
 ## Reproduction Scope
 
@@ -17,34 +45,24 @@ Dataset source links and expected local CSV paths are documented in `DATA.md`.
 | FrenchPiezo lag-candidate sensitivity | Final configs | External evidence package |
 | FrenchPiezo lambda sensitivity | Final configs | External evidence package |
 | Lightweight final CSV snapshots | Yes | Generated from evidence package |
-| Raw data, checkpoints, full predictions | No | Keep outside this repository |
+| Raw data, checkpoints, full predictions | No | Kept outside this repository |
 
-Final task settings:
+Dataset source links and expected local CSV paths are documented in [DATA.md](DATA.md). Evidence package usage is documented in [EVIDENCE_PACKAGE.md](EVIDENCE_PACKAGE.md).
 
-- Datasets: FrenchPiezo main experiment and BC PGOWN128 external validation.
-- Task: daily `90 d -> 30 d` sequence forecasting.
-- Target: future 30-day daily groundwater-level-change sequence, represented as change from the prediction start level.
-- Lag candidates: `[3, 7, 14, 30]`.
-- Graph setting: `topk=15`, `alpha/lambda=0.3`.
-- Seed: `2022`.
-- Paper tables: MAE and RMSE are reported in `cm`.
+## Quick Start
 
-## Environment
-
-Conda:
+Create the environment:
 
 ```powershell
 conda env create -f environment.yml
 conda activate groundwater-lagnet
 ```
 
-Pip fallback:
+Or install with pip:
 
 ```powershell
 python -m pip install -r requirements.txt
 ```
-
-## Main Commands
 
 Prepare data after placing raw CSV files at the paths declared in `configs/final/*.yaml`:
 
@@ -60,9 +78,14 @@ python scripts\train.py --config configs\final\frenchpiezo_main.yaml --model lag
 python scripts\train.py --config configs\final\bc_pgown128_main.yaml --model lag_stgnet --horizon 30
 ```
 
-Each run writes `metrics.json` in the standardized target-delta scale and `metrics_paper.json` with MAE/RMSE converted to `cm`.
+Each run writes:
 
-Generate final paper tables from the evidence package:
+| File | Metric scale |
+| --- | --- |
+| `metrics.json` | Standardized target-delta scale |
+| `metrics_paper.json` | Paper scale, with MAE/RMSE converted to `cm` |
+
+Generate final paper tables from the external evidence package:
 
 ```powershell
 python scripts\make_final_paper_tables.py --package ..\evidence_package_20260602 --out-dir results\final_paper_tables
@@ -70,10 +93,11 @@ python scripts\make_final_paper_tables.py --package ..\evidence_package_20260602
 
 If `--package` is omitted, the script checks `GROUNDWATER_EVIDENCE_PACKAGE`, then searches for a sibling `*20260602` directory containing `summary_csv`.
 
-Run tests:
+Run tests and release checks:
 
 ```powershell
 python -m pytest tests -q
+python scripts\check_release_clean.py
 ```
 
 ## Metric Scale
@@ -102,7 +126,11 @@ The repository includes API-compatible baseline classes so the final training in
 
 The generated final paper table should include these LAG-STGNet values:
 
-- FrenchPiezo RMSE: `34.06863021850586 cm` (`34.07 cm` in manuscript text).
-- BC PGOWN128 RMSE: `51.02039868039719 cm` (`51.02 cm` in manuscript text).
+| Dataset | RMSE |
+| --- | ---: |
+| FrenchPiezo | `34.06863021850586 cm` |
+| BC PGOWN128 | `51.02039868039719 cm` |
 
-See `DATA.md` for data boundaries and `EVIDENCE_PACKAGE.md` for evidence package layout.
+## Citation
+
+If you use this repository, please cite the accompanying paper and this code package. The machine-readable citation metadata is provided in [CITATION.cff](CITATION.cff).
