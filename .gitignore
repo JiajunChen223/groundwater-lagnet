@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environments
+.venv/
+venv/
+env/
+*.egg-info/
+
+# Runtime outputs and heavy artifacts
+outputs/
+data/processed/
+data/raw/**/*.csv
+**/checkpoint*.pt
+**/*.pt
+**/predictions*.npz
+**/metrics_eval.json
+**/train_history.json
+logs/
+tmp/
+temp/
+evidence_package*/
+*20260602/
+release_tmp/
+results/tmp/
+results/local/
+
+# Keep lightweight final paper tables tracked
+!results/
+!results/final_paper_tables/
+!results/final_paper_tables/*.csv
+
+# OS and editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

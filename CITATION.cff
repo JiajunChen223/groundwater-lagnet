@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+title: Groundwater-LAGNet
+message: If you use this code, please cite the accompanying paper.
+authors:
+  - family-names: Author
+    given-names: First
+date-released: 2026-06-04
+repository-code: https://example.com/groundwater-lagnet
+license: MIT

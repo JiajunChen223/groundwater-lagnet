@@ -1,0 +1,15 @@
+name: groundwater-lagnet
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - numpy
+  - pandas
+  - scikit-learn
+  - pytorch
+  - pyyaml
+  - tqdm
+  - matplotlib
+  - pytest

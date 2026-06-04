@@ -1,0 +1,61 @@
+﻿seed: 2022
+device: cuda
+data:
+  raw_path: data/raw/frenchpiezo/dataset_2015_2021_nomissing_linear.csv
+  processed_dir: data/processed/frenchpiezo_response128_topk10_fullrerun
+  date_col: time
+  station_col: bss
+  target_col: p
+  target_unit_to_cm: 100.0
+  feature_cols:
+  - p
+  - tp
+  - e
+  - month_sin
+  - month_cos
+  input_window: 90
+  horizons:
+  - 30
+  split_ratio:
+  - 0.7
+  - 0.1
+  - 0.2
+  fill_method: interpolate
+  scale_method: standard
+graph:
+  type: corr_learned
+  topk: 10
+  alpha: 0.3
+model:
+  name: lag_stgnet
+  d_model: 64
+  hidden_size: 64
+  num_layers: 3
+  dropout: 0.1
+  kernel_size: 3
+  input_window: 90
+  individual: false
+  nhead: 4
+  diffusion_steps: 2
+  hops: 2
+  lag_kernels:
+  - 3
+  - 7
+  - 14
+  - 30
+  lag_type: station
+  use_lag: true
+  use_graph: true
+  use_learned_adj: true
+  residual_connection: false
+  target_index: 0
+train:
+  batch_size: 32
+  epochs: 80
+  lr: 0.001
+  weight_decay: 0.0001
+  patience: 12
+  loss: huber
+  num_workers: 0
+output:
+  save_dir: outputs/top15_full_rerun/frenchpiezo/k_sensitivity/k_10

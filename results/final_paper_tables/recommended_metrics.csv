@@ -1,0 +1,4 @@
+Dataset,Role,ModelOrSetting,Model,Horizon,MAE,RMSE,Unit,DirectionAcc,R2,PreferredUse,EvidenceFile
+FrenchPiezo,main,LAG-STGNet,lag_stgnet,30,17.596357345581055,34.06863021850586,cm,0.7727979811946902,0.5924010318125277,Main FrenchPiezo LAG-STGNet result; report MAE/RMSE/R2/DirectionAcc.,summary_csv/frenchpiezo_top15_summaries/paper_key_results.csv
+FrenchPiezo,main baseline,Graph WaveNet,graph_wavenet,30,18.006282806396484,36.64045333862305,cm,0.759160674778761,0.5285393995672363,Strongest FrenchPiezo baseline used for paper comparison.,summary_csv/frenchpiezo_top15_summaries/paper_key_results.csv
+BC_PGOWN128,external validation,LAG-STGNet k4,lag_stgnet,30,21.68414766241858,51.02039868039719,cm,0.7052172364672364,0.3292863368988037,BC PGOWN128 external validation result; report MAE/RMSE/DirectionAcc.,summary_csv/external_dataset_summaries/bc_pgown128_seq30_main_summary.csv

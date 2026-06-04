@@ -1,0 +1,5 @@
+Dataset,TopK,MAE,RMSE,Unit,R2,DirectionAcc,EvidenceFile,run_dir
+FrenchPiezo,5,20.221553802490234,38.38965225219727,cm,0.4824502574455337,0.6975421736725663,summary_csv/frenchpiezo_top15_summaries/frenchpiezo_k_sensitivity_summary.csv,01_FrenchPiezo_main/k_sensitivity/k_5/runs/lag_stgnet_h30_s2022_1779958335
+FrenchPiezo,10,17.877548217773438,34.31319808959961,cm,0.5865279908309113,0.7529210453539823,summary_csv/frenchpiezo_top15_summaries/frenchpiezo_k_sensitivity_summary.csv,01_FrenchPiezo_main/k_sensitivity/k_10/runs/lag_stgnet_h30_s2022_1779958395
+FrenchPiezo,15,17.596357345581055,34.06863021850586,cm,0.5924010318125277,0.7727979811946902,summary_csv/frenchpiezo_top15_summaries/frenchpiezo_main_summary.csv,01_FrenchPiezo_main/main/lag_stgnet/runs/lag_stgnet_h30_s2022_1779957547
+FrenchPiezo,20,17.847679138183594,34.4796028137207,cm,0.5825079164605196,0.7591952433628318,summary_csv/frenchpiezo_top15_summaries/frenchpiezo_k_sensitivity_summary.csv,01_FrenchPiezo_main/k_sensitivity/k_20/runs/lag_stgnet_h30_s2022_1779958486
