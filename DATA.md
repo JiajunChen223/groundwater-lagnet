@@ -1,8 +1,14 @@
 # Data Notes
 
-Raw datasets are not bundled in this lightweight code repository. Place them at the paths declared below before running preprocessing or training. Paper-table reproduction still works when a complete evidence package is supplied.
+Raw datasets are not bundled in this lightweight code repository. Public source links and expected local paths are listed below. Place the prepared CSV files at the declared paths before running preprocessing or training. Paper-table reproduction still works when a complete evidence package is supplied.
 
 ## FrenchPiezo
+
+The source cited in the manuscript is the French national water-data piezometry dataset:
+
+```text
+https://www.data.gouv.fr/datasets/piezometrie
+```
 
 Expected local path:
 

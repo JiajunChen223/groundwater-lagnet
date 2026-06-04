@@ -4,6 +4,8 @@ Final paper-scope lightweight code package and evidence-table generator for stat
 
 This repository is intentionally not a full raw-data-to-paper archive. It contains the public training/evaluation code, final-scope configs, lightweight result-table snapshots, and a script that regenerates the paper tables from a separate evidence package. Raw datasets, checkpoints, complete predictions, and large archived run directories are kept outside the code repository.
 
+Dataset source links and expected local CSV paths are documented in `DATA.md`.
+
 ## Reproduction Scope
 
 | Component | Included here | Source of paper numbers |
